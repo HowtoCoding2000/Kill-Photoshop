@@ -100,6 +100,32 @@ public class Picture extends SimplePicture
 		    		}
 		    	}
 		}
+  /** Method to keep only red */
+	public void keepOnlyRed()
+		{
+			Pixel[][] pixels = this.getPixels2D();
+		    for (Pixel[] rowArray : pixels)
+		    	{
+		    	for (Pixel pixelObj : rowArray)
+		    		{
+		    		pixelObj.setBlue(0);
+		    		pixelObj.setGreen(0);
+		    		}
+		    	}
+		}
+  /** Method to keep only green */
+	public void keepOnlyGreen()
+		{
+			Pixel[][] pixels = this.getPixels2D();
+		    for (Pixel[] rowArray : pixels)
+		    	{
+		    	for (Pixel pixelObj : rowArray)
+		    		{
+		    		pixelObj.setRed(0);
+		    		pixelObj.setBlue(0);
+		    		}
+		    	}
+		}
   /** Method to negate all the pixels in a picture */
 	public void negate()
 		{
@@ -163,6 +189,27 @@ public class Picture extends SimplePicture
 		        rightPixel.setColor(leftPixel.getColor());
 	    		}
 	    	} 
+		}
+  /** Method that mirrors a picture around a mirror
+   * placed vertically from left to right */
+	public void mirrorVerticalLeftToRight()
+		{
+			Pixel[][] pixels = this.getPixels2D();
+		    Pixel leftPixel = null;
+		    Pixel rightPixel = null;
+		    Pixel temp = pixels[0][0];
+		    int width = pixels[0].length;
+		    for (int row = 0; row < pixels.length; row++)
+		    	{
+		    	for (int col = 0; col < width / 2; col++)
+		    		{
+			        leftPixel = pixels[row][col];
+			        rightPixel = pixels[row][width - 1 - col];
+			        temp.setColor(rightPixel.getColor());
+			        rightPixel.setColor(leftPixel.getColor());
+			        leftPixel.setColor(temp.getColor());
+		    		}
+		    	} 
 		}
   /** Method that mirrors a picture around a
    * horizontal mirror in the center of the picture
